@@ -2,11 +2,23 @@ const priceElement = document.getElementById("product");
 const numberElement = document.getElementById("number");
 let purchases = [];
 
+const products = {
+  1: { name: "オリジナルブレンド200g", price: 500 },
+  2: { name: "オリジナルブレンド500g", price: 900 },
+  3: { name: "スペシャルブレンド200g", price: 700 },
+  4: { name: "スペシャルブレンド500g", price: 1200 }
+}
+
 function add() {
-  const price = parseInt(priceElement.value) || 0;
+  const id = parseInt(priceElement.value)
+  if (id == 0) return window.alert("商品を選択してください")
+
+  const name = products[id].name;
+  const price = products[id].price;
   const number = parseInt(numberElement.value) || 0;
 
   const purchase = {
+    name: name,
     price: price,
     number: number,
   };
@@ -34,7 +46,6 @@ function add() {
   // }
 
   window.alert(`${display()}\n\n小計${subtotal()}円`);
-  priceElement.value= "";
   numberElement.value = "";
 }
 
@@ -65,14 +76,14 @@ function display() {
   // }
   // return string;
   return purchases.map(purchase => {
-    return `${purchase.price}円が${purchase.number}点`
+    return `${purchase.name} ${purchase.price}円: ${purchase.number}点`
   }).join("\n");
 }
 
 function calcPostageFromPurchase(sum) {
   if (sum == 0 || sum >= 3000) {
     return 0;
-  } else if (sum < 1000){
+  } else if (sum < 2000){
     return 500;
   } else {
     return 250;
