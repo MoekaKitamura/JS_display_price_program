@@ -114,3 +114,8 @@ body {
 .drop_menu_item li {
   list-style: none;
 }
+
+#email_validation {
+  color: #d14539;
+  display: none;
+}
